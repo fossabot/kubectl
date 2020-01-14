@@ -1,4 +1,6 @@
 [![Docker Repository on Quay](https://quay.io/repository/bukow/kubectl/status "Docker Repository on Quay")](https://quay.io/repository/bukow/kubectl)
+
+Created by following [documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/#optional-kubectl-configurations)
 ```bash
 docker run --rm -it --network=host \
     -v /${PWD}:/kube \
