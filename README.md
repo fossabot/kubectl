@@ -3,5 +3,5 @@
 docker run --rm -it --network=host \
     -v /${PWD}:/kube \
     -v ~.kube/:/root/.kube \
-    quay.io/bukow/kubectl:1.16.2
+    quay.io/bukow/kubectl
 ```
