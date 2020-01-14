@@ -1,6 +1,6 @@
 FROM alpine
 
-ARG VERSION="v1.16.2"
+ARG VERSION="v1.17.0"
 ENV PS1="\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[0;35m\]\w\[\e[0m\]\$ "
 
 RUN apk update && \
@@ -27,4 +27,8 @@ RUN echo 'alias kevents=kubectl get -w -A events' >>~/.bashrc
 RUN mkdir /kube
 WORKDIR /kube
 
+# list all resources https://github.com/kubernetes/kubectl/issues/151#issuecomment-551868982
+RUN printf "alias kall='kubectl get \$(kubectl api-resources --verbs=list -o name | paste -sd, -) --ignore-not-found --all-namespaces'\n" >>~/.bashrc
+
+RUN cat ~/.bashrc
 CMD ["/bin/bash"]
