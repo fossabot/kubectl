@@ -20,6 +20,9 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION
     && echo 'alias k=kubectl' >>~/.bashrc \
     && echo 'complete -F __start_kubectl k' >>~/.bashrc
 
+# list all resources https://github.com/kubernetes/kubectl/issues/151#issuecomment-551868982
+RUN echo 'alias kall=kubectl get $(kubectl api-resources --verbs=list -o name | paste -sd, -) --ignore-not-found --all-namespaces' >>~/.bashrc
+
 RUN mkdir /kube
 WORKDIR /kube
 
