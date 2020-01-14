@@ -22,7 +22,7 @@ RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION
 
 # list all resources https://github.com/kubernetes/kubectl/issues/151#issuecomment-551868982
 RUN echo 'alias kall=kubectl get $(kubectl api-resources --verbs=list -o name | paste -sd, -) --ignore-not-found --all-namespaces' >>~/.bashrc
-RUN echo 'alias kevents=kubectl get -w -A events'
+RUN echo 'alias kevents=kubectl get -w -A events' >>~/.bashrc
 
 RUN mkdir /kube
 WORKDIR /kube
