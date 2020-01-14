@@ -1,0 +1,14 @@
+name: test kubectl
+
+on:
+  push:
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: test.sh
+      run: make test-simple
+    - name: run
+      run: make run
