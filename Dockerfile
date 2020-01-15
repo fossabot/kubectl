@@ -6,7 +6,8 @@ ENV PS1="\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[0;35m\]\w\[\e[0m\]
 RUN apk update && \
     apk upgrade && \
     apk add bash && \
-    apk add curl
+    apk add curl && \
+    apk add make
 
 RUN apk add bash-completion \
     && echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc \
