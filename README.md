@@ -9,6 +9,7 @@ docker run --rm -it --network=host \
 ```
 ```bash
 alias kd='docker run --rm -it --network=host -v /${PWD}:/kube -v ~.kube/:/root/.kube quay.io/bukow/kubectl:1.16.2'
+alias kpull='docker pull quay.io/bukow/kubectl:1.16.2'
 ```
 
 
