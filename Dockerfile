@@ -27,7 +27,7 @@ WORKDIR /kube
 # list all resources https://github.com/kubernetes/kubectl/issues/151#issuecomment-551868982
 RUN printf "alias kall='kubectl get \$(kubectl api-resources --verbs=list -o name | paste -sd, -) --ignore-not-found --all-namespaces'\n" >>~/.bashrc
 RUN printf "alias kcreatedashboard='kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml'\n" >>~/.bashrc
-RUN printf "alias kevents='kubectl get -w -A events --sort-by=.metadata.creationTimestamp'\n" >>~/.bashrc
+RUN printf "alias kevents='kubectl get -w -A events --sort-by=.eventTime'\n" >>~/.bashrc
 
 RUN cat ~/.bashrc
 CMD ["/bin/bash"]
