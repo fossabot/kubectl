@@ -7,7 +7,9 @@ RUN apk update && \
     apk upgrade && \
     apk add bash && \
     apk add curl && \
-    apk add make
+    apk add make && \
+    apk add openssl && \
+    apk add git
 
 RUN apk add bash-completion \
     && echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc \
@@ -27,7 +29,17 @@ WORKDIR /kube
 # list all resources https://github.com/kubernetes/kubectl/issues/151#issuecomment-551868982
 RUN printf "alias kall='kubectl get \$(kubectl api-resources --verbs=list -o name | paste -sd, -) --ignore-not-found --all-namespaces'\n" >>~/.bashrc
 RUN printf "alias kcreatedashboard='kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0-beta8/aio/deploy/recommended.yaml'\n" >>~/.bashrc
-RUN printf "alias kevents='kubectl get -w -A events --sort-by=.eventTime'\n" >>~/.bashrc
+RUN printf "alias keventst='kubectl get -w -A events --sort-by=.eventTime'\n" >>~/.bashrc
+RUN printf "alias kevents='kubectl get -w -A events --sort-by=.metadata.creationTimestamp'\n" >>~/.bashrc
+
+# linkerd
+RUN curl -sL https://run.linkerd.io/install | sh
+ENV PATH="/root/.linkerd2/bin:${PATH}"
+RUN printf "alias linkerdprecheck='linkerd check --pre'\n" >>~/.bashrc
+RUN printf "alias linkerdinstall='linkerd install | kubectl apply -f -'\n" >>~/.bashrc
+RUN printf "alias linkerduninstall='linkerd install --ignore-cluster | kubectl delete -f -'\n" >>~/.bashrc
+RUN printf "alias linkerdcheck='linkerd check'\n" >>~/.bashrc
+RUN printf "alias linkerdash='linkerd dashboard --address=0.0.0.0 &'\n" >>~/.bashrc
 
 RUN cat ~/.bashrc
 CMD ["/bin/bash"]
