@@ -8,7 +8,18 @@ docker run --rm -it --network=host \
     quay.io/bukow/kubectl:1.16.2
 ```
 ```bash
-alias kd='docker run --rm -it -p 50750:50750 --expose 50750 -v /${PWD}:/kube -v ~.kube/:/root/.kube quay.io/bukow/kubectl:1.16.2'
+alias kp='docker run --rm -it \
+-v zsh_history_volume:/root/.volumes/ \
+-v /${PWD}:/kube \
+-v ~.kube/:/root/.kube \
+quay.io/bukow/kubectl:1.16.2'
+
+alias kdlinkerd='docker run --rm -it \
+-v zsh_history_volume:/root/.volumes/ \
+-v /${PWD}:/kube \
+-v ~.kube/:/root/.kube \
+-p 50750:50750 --expose 50750 \
+quay.io/bukow/kubectl:1.16.2'
 alias kpull='docker pull quay.io/bukow/kubectl:1.16.2'
 ```
 

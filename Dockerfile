@@ -50,5 +50,9 @@ RUN printf "alias linkerduninstall='linkerd install --ignore-cluster | kubectl d
 RUN printf "alias linkerdcheck='linkerd check'\n" >>~/.zshrc
 RUN printf "alias linkerdash='linkerd dashboard --address=0.0.0.0 &'\n" >>~/.zshrc
 
+# zsh history
+VOLUME /root/.volumes/
+
+RUN echo "export HISTFILE=/root/.volumes/.zsh_history" >> ~/.zshrc
 RUN apt-get clean
 ENTRYPOINT ["/bin/zsh"]
