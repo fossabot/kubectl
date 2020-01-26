@@ -1,27 +1,21 @@
-FROM alpine
+FROM ubuntu
+
+RUN apt-get update && apt-get -y upgrade && \
+    apt-get -y install \
+    bash curl make openssl git
+
+#RUN apk add bash-completion \
+#    && echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc \
+#    && echo 'source <(kubectl completion bash)' >> ~/.bashrc
 
 ARG VERSION="v1.16.2"
-ENV PS1="\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[0;35m\]\w\[\e[0m\]\$ "
-
-RUN apk update && \
-    apk upgrade && \
-    apk add bash && \
-    apk add curl && \
-    apk add make && \
-    apk add openssl && \
-    apk add git
-
-RUN apk add bash-completion \
-    && echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc \
-    && echo 'source <(kubectl completion bash)' >> ~/.bashrc
-
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
-    && mv ./kubectl /usr/local/bin/kubectl \
-    && mkdir /etc/bash_completion.d/ \
-    && kubectl completion bash >/etc/bash_completion.d/kubectl \
-    && echo 'alias k=kubectl' >>~/.bashrc \
-    && echo 'complete -F __start_kubectl k' >>~/.bashrc
+    && mv ./kubectl /usr/local/bin/kubectl
+#    && mkdir /etc/bash_completion.d/ \
+#    && kubectl completion bash >/etc/bash_completion.d/kubectl \
+#    && echo 'alias k=kubectl' >>~/.bashrc \
+#    && echo 'complete -F __start_kubectl k' >>~/.bashrc
 
 RUN mkdir /kube
 WORKDIR /kube
@@ -49,4 +43,11 @@ RUN curl -LO "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" && \
     mv linux-amd64/helm /usr/local/bin && \
     rm -r "helm-v${HELM_VERSION}-linux-amd64.tar.gz" "linux-amd64"
 
-CMD ["/bin/bash"]
+# zsh ohmyzsh
+# ENV PS1="\[\e[0;36m\]\u\[\e[0m\]@\[\e[0;33m\]\h\[\e[0m\]:\[\e[0;35m\]\w\[\e[0m\]\$ "
+RUN apt-get -y install zsh
+RUN sh -c "$(curl -fsSL https://raw.github.com/bukforks/ohmyzsh/master/tools/install.sh)"
+RUN sed -i "s/plugins=(git)/plugins=(git kubectl)/g" ~/.zshrc
+
+RUN apt-get clean
+CMD ["/bin/zsh"]
