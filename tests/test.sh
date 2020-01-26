@@ -1,6 +1,5 @@
 #!/bin/bash
-shopt -s expand_aliases
-source ~/.bashrc
+source ~/.zshrc
 set -eux
 
 type kall
@@ -15,3 +14,6 @@ type linkerdash
 type k
 
 k version --client
+type helm
+# ohmyzsh kubectl
+type kdelcm
