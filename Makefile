@@ -4,7 +4,7 @@ IMAGETAG=kubectl:${VERSION}
 build:
 	docker build --tag=${IMAGETAG} .
 
-test-alias: build
+test: build
 	docker run --rm --volume="/$${PWD}/tests:/kube" ${IMAGETAG} ./test.sh
 
 test-kube: build

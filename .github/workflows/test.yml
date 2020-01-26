@@ -9,6 +9,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: test alias
-      run: make test-alias
+      run: make test
     - name: ls
       run: make run-ls
