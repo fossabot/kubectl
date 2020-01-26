@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -y upgrade && \
 #    && echo 'source /usr/share/bash-completion/bash_completion' >>~/.bashrc \
 #    && echo 'source <(kubectl completion bash)' >> ~/.bashrc
 
-ARG VERSION="v1.16.2"
+ARG VERSION="v1.17.2"
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl \
     && chmod +x ./kubectl \
     && mv ./kubectl /usr/local/bin/kubectl
