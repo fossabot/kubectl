@@ -10,8 +10,8 @@ test: build
 test-kube: build
 	docker run --rm --volume="/$${PWD}/tests:/kube" --volume="~.kube/:/root/.kube" ${IMAGETAG} ./test.kube.sh
 
-run-ls: build
-	docker run --rm ${IMAGETAG} ls -al /
+test-hello: build
+	docker run --rm ${IMAGETAG} -c "echo HELLO WORLD"
 
 run: build
-	docker run --rm -it ${IMAGETAG}
+	docker run --rm -it ${IMAGETAG} $(args)
