@@ -41,5 +41,12 @@ RUN printf "alias linkerduninstall='linkerd install --ignore-cluster | kubectl d
 RUN printf "alias linkerdcheck='linkerd check'\n" >>~/.bashrc
 RUN printf "alias linkerdash='linkerd dashboard --address=0.0.0.0 &'\n" >>~/.bashrc
 
-RUN cat ~/.bashrc
+# helm
+ARG HELM_VERSION=3.0.2
+RUN curl -LO "https://get.helm.sh/helm-v${HELM_VERSION}-linux-amd64.tar.gz" && \
+    tar -xvzf "helm-v${HELM_VERSION}-linux-amd64.tar.gz" && \
+    chmod +x linux-amd64/helm && \
+    mv linux-amd64/helm /usr/local/bin && \
+    rm -r "helm-v${HELM_VERSION}-linux-amd64.tar.gz" "linux-amd64"
+
 CMD ["/bin/bash"]
