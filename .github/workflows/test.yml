@@ -17,4 +17,4 @@ jobs:
       uses: bukforks/webhook-action@749e2dcbc6735ce0c36e1dbbb660618cd7b5f91c
       env:
         WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        data: thank you
+        data: "{'commit': '${GITHUB_SHA}', 'ref': '${GITHUB_REF}'}"
