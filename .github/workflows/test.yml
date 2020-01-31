@@ -8,7 +8,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
+
     - name: test alias
       run: make test
     - name: ls
       run: make test-hello
+    - name: push
+      uses: bukforks/webhook-action@749e2dcbc6735ce0c36e1dbbb660618cd7b5f91c
+      env:
+        WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
+        data: thank you
