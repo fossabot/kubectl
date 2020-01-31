@@ -19,3 +19,4 @@ type helm
 type kdelcm
 # zsh history
 if [[ "$HISTFILE" == "/root/.volumes/.zsh_history" ]]; then true; fi
+type skaffold

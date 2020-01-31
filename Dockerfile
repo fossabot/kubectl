@@ -53,6 +53,11 @@ RUN printf "alias linkerdash='linkerd dashboard --address=0.0.0.0 &'\n" >>~/.zsh
 # zsh history
 VOLUME /root/.volumes/
 
+# skaffold
+RUN curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+    chmod +x skaffold && \
+    mv skaffold /usr/local/bin
+
 RUN echo "export HISTFILE=/root/.volumes/.zsh_history" >> ~/.zshrc
 RUN apt-get clean
 ENTRYPOINT ["/bin/zsh"]
