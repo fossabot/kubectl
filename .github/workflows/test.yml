@@ -14,7 +14,6 @@ jobs:
     - name: ls
       run: make test-hello
     - name: push
-      uses: bukforks/webhook-action@749e2dcbc6735ce0c36e1dbbb660618cd7b5f91c
+      uses: bukforks/webhook-action@ff28ac3ce3f6d4b334e465d576a37322ca25a09e
       env:
         WEBHOOK_URL: ${{ secrets.WEBHOOK_URL }}
-        data: "{'commit': '${GITHUB_SHA}', 'ref': '${GITHUB_REF}'}"
