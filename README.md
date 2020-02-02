@@ -1,4 +1,5 @@
 [![Docker Repository on Quay](https://quay.io/repository/bukow/kubectl/status "Docker Repository on Quay")](https://quay.io/repository/bukow/kubectl)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbukowa%2Fkubectl.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbukowa%2Fkubectl?ref=badge_shield)
 
 ```bash
 alias kp='docker run --rm -it \
@@ -23,3 +24,7 @@ Docker Desktop for Mac
 Docker Desktop for Windows
 Docker EE for Windows Server
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fbukowa%2Fkubectl.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fbukowa%2Fkubectl?ref=badge_large)
